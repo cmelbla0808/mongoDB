@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: my_mongoCMB
+    volumes:
+      - mi_volumenCMB:/data/db
+    networks:
+      - mi_redCMB
+
+  mongo-express:
+    image: mongo-express 
+    container_name: mi_mongoExpressCMB
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    volumes:
+      - mi_volumenCMB:/data/db
+    networks:
+      - mi_redCMB
+    depends_on: 
+      - mongodb
+
+volumes:
+  mi_volumenCMB:
+    
+
+networks:
+  mi_redCMB:
